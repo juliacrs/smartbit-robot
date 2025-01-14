@@ -1,12 +1,23 @@
 import psycopg2
 
+import os       # pega a var de amb do SO
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Passar como string >>  tirar ',' e trocar: database > dbname
-db_conn = """
-        host='localhost'
-        dbname='smartbit'
-        user='postgres'
-        password='QAx@123'
+db_conn =f"""
+        host='{os.getenv('DB_HOST')}'
+        dbname='{os.getenv('DB_NAME')}'
+        user='{os.getenv('DB_USER')}'
+        password='{os.getenv('DB_PASS')}'
     """
+# db_conn ="""
+#         host='localhost'
+#         dbname='smartbit'
+#         user='postgres'
+#         password='QAx@123'
+#     """
 
 def execute(query):
     conn = psycopg2.connect(db_conn)
